@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#c{
+				width:100px;
+				height:100px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1 style="color: red;background-color:blue ;">学如逆水行舟不进则退，</br>心似平原走马易放难收</h1>
+		<h1>学如逆水行舟不进则退，</br>心似平原走马易放难收</h1>
+		<p>这是一个p标签</p>
+		<div class="f-6">
+			<h1 class="wxm goudan">我叫王小明,小名叫狗蛋</h1>
+			<h1 id="id123456">id就像身份证，一个id只能给一个元素，一个元素只能有一个id</h1>
+		</div>
+		<div class="f-7">
+			<h1 class="wxm">我叫李小明</h1>
+		</div>
+		<p></p>
+		通用选择器
+		<h2>Do You Love Me?</h2>
+		<h3>A.YES <span>good boy!</span></h3>
+		<h3>B.NO <span>go die!</span></h3>
+		
+		<div id='c' style="background-color: green;"></div>
+		
+		<div id="div1" style="color: blue;" title="ddd" myattribute="yoga">123
+			<!--comment123 -->
+			<strong>3\234</strong>
+			<p>345
+				<span>456</span>
+			</p>
+			<span>444"wuwo1"</span>
+			<em>789</em>
+		</div>
+		
+		<script>
+			var h1 = document.getElementsByTagName('h1')
+			console.log(h1)
+			Array.from(h1).forEach(function(n){
+				console.log(n)
+			})
+			
+			var c = document.getElementById('c')
+			c.setAttribute('style','background-color:blue')
+			setTimeout(function(){
+				c.setAttribute('style','background-color:red')
+			},1000)
+			
+			var div = document.getElementsByTagName('div')[0]
+			console.log(div.childNodes)
+			console.log(div.children)
+			div.childNodes.forEach(function(n){
+				console.log(n)
+				console.log('t:'+n.nodeType)
+				console.log("n:"+n.nodeName)
+				console.log("v:"+n.nodeValue)
+				
+			})
+			
+			console.log(document.getElementById('div1'))
+			console.log(document.getElementById('div1').attributes)
+			console.log(document.getElementById('div1').attributes.getNamedItem('myattribute'))
+			console.log(document.getElementById('div1').getAttribute('myattribute'))
+			console.log(document.getElementById('div1').attributes.getNamedItem('myattribute').nodeValue)
+		</script>
+	</body>
+</html>

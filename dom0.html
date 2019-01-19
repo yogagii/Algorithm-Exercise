@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+			<input type="button" id="1" value="1" onclick="moveButton(this)"/> 
+			<input type="button" id="2" value="2"/> 
+		<script>
+			//复制节点
+			function moveButton(obj){
+				var clone = obj.cloneNode(true)
+				var parent = obj.parentNode
+				parent.appendChild(clone)
+				parent.removeChild(obj)
+			}
+			
+			//共同父节点
+			function commonParentNode(oNode1, oNode2) {
+			    for(;oNode1;oNode1=oNode1.parentNode){
+			        if(oNode1.contains(oNode2)){
+			            return oNode1;
+			        }
+			    }
+			}
+		</script>
+	</body>
+
+</html>

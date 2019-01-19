@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			var n = 8
+			var a = [ 10,6,7,7,7,2,1,1,1,4,5,2,1,2,3,1, 2, 3, 4, 5]
+			var cnt = 0
+			var l = 1000000000
+			while(a.length > 1) {
+				var flag = true
+				var last = 1000000000
+				while(flag) {
+					max = 0
+					index = -1
+					for(var i = 0; i < a.length; i++) {
+						//console.log('last:'+last)
+						if(max <= a[i]&&a[i]<last) {
+							max = a[i]
+							index = i
+						}
+					}
+					if(index == -1) {
+						flag = false
+						cnt++
+					} else {
+						console.log(max)
+						last = max
+						l=last
+						a = a.slice(0, index).concat(a.slice(index + 1))
+						console.log(a)
+					}
+				}
+			}
+			console.log('l:'+l)
+			if(a[0]>=l){cnt++}
+			console.log('cnt:'+cnt)
+		</script>
+	</body>
+
+</html>

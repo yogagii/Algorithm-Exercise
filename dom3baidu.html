@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,
+			html {
+				margin: 0;
+			}
+			
+			table {
+				border-collapse: collapse;
+				table-layout: fixed;
+				margin: 10px auto;
+			}
+			
+			td {
+				border: 1px solid #E1E1E1;
+				padding: 0;
+				width: 30px;
+				height: 30px;
+				cursor: pointer;
+			}
+			
+			.current {
+				background: #1D2088;
+			}
+			
+			.wrap {
+				background: #00A0E9;
+			}
+
+		</style>
+	</head>
+
+	<body>
+		<table id="jsLayout">
+			<tbody>
+				<tr>
+					<td class="current"></td>
+					<td class="wrap"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="wrap"></td>
+					<td class="wrap"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<script>
+			bind()
+			function bind() {
+				var a = document.querySelectorAll('#jsLayout tbody td');
+				console.log(a)
+//				var c = document.getElementsByTagName('td');
+//				console.log(c)
+				for(var i = 0; i < a.length; i++) {
+					a[i].addEventListener('click', function(e) {
+						
+						for(var j = 0; j < a.length; j++) {
+							a[j].removeAttribute('class','current')
+							a[j].removeAttribute('class','wrap')
+						}
+						
+						console.log(e)
+						console.log(e.target)
+						e.target.setAttribute('class','current')
+						setwrap(e.target.nextElementSibling)
+						setwrap(e.target.previousElementSibling)
+						//e.target.previousElementSibling.setAttribute("class", "wrap");
+						//var index = e.target.indexOf(e.target.parentNode.childNodes);
+						var arr = Array.from(e.target.parentNode.childNodes);
+						console.log(arr)
+						var index = arr.indexOf(e.target);
+						console.log(index)
+						console.log(e.target.parentNode.childNodes[index])
+						if(e.target.parentNode.nextElementSibling){
+							setwrap(e.target.parentNode.nextElementSibling.childNodes[index])
+							setwrap(e.target.parentNode.nextElementSibling.childNodes[index-2])
+							setwrap(e.target.parentNode.nextElementSibling.childNodes[index+2])
+						}
+						if(e.target.parentNode.previousElementSibling){
+							setwrap(e.target.parentNode.previousElementSibling.childNodes[index])
+							setwrap(e.target.parentNode.previousElementSibling.childNodes[index-2])
+							setwrap(e.target.parentNode.previousElementSibling.childNodes[index+2])
+						}
+					});
+				}
+			}
+			
+			function setwrap(x){
+				if(x){
+					x.setAttribute("class", "wrap");
+				}
+			}
+		</script>
+	</body>
+
+</html>

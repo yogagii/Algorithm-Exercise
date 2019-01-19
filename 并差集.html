@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var parent = new Array();
+			function Find(i){
+				if(parent[i]<0){
+					return i;
+				}else{
+					var root = Find(parent[i])
+					parent[i]=root;
+					return root;
+				}
+			}
+			function Union(x,y){
+				var rt1 = Find(x);
+				var rt2 = Find(y);
+				if (rt1 == rt2) return;
+				if(parent[rt1]<parent[rt2]){
+					parent[rt1]+=parent[rt2]
+					parent[rt2]=rt1
+				}else{
+					parent[rt2]+=parent[rt1]
+					parent[rt1]=rt2
+				}
+			}
+			for(var i=1;i<11;i++){
+				parent[i]=-1;
+			}
+			var tu = [[0],[5,3,0],[8,4,0],[9,0],[9,0],[3,0],[0],[7,9,0],[0],[9,7,0]]
+			for(var i =0;i<10;i++){
+				for(var j =0;j<tu[i].length-1;j++){
+					Union(i+1,tu[i][j]);
+				}
+			}
+			var count = parent.filter(function(n){
+				return n<0;
+			})
+			console.log(count)
+			console.log(count.length)
+		</script>
+	</body>
+</html>

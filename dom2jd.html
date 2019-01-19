@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,html{
+			    padding: 0;
+			    margin: 0;
+			    font-size: 14px;
+			    color: #000000;
+			}
+			table{
+			    border-collapse: collapse;
+			    width: 100%;
+			    table-layout: fixed;
+			}
+			thead{
+			    background: #3d444c;
+			    color: #ffffff;
+			}
+			td,th{
+			    border: 1px solid #e1e1e1;
+			    padding: 0;
+			    height: 30px;
+			    line-height: 30px;
+			    text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<table id="jsTrolley">
+		    <thead><tr><th>名称</th><th>价格</th><th>操作</th></tr></thead>
+		    <tbody>
+		        <tr>
+		        	<td>产品1</td>
+		        	<td>10.00</td>
+		        	<td><a href="javascript:bind();">删除</a></td>
+		        </tr>
+		        <tr>
+		        	<td>产品2</td>
+		        	<td>30.20</td>
+		        	<td><a href="javascript:bind();">删除</a></td>
+		        	<!--点两次才触发，要把函数直接写在里面-->
+		        </tr>
+		        <tr>
+		        	<td>产品3</td>
+		        	<td>20.50</td>
+		        	<td onclick='bind()'><a href="javascript:void(0);">删除</a></td>
+		        </tr>
+		    </tbody>
+		    <tfoot>
+			    <tr>
+			    	<th>总计</th>
+			    	<td colspan="2">60.70(3件商品)</td>
+			    </tr>
+		    </tfoot>
+		</table>
+		<script type="text/javascript">
+			function add(items) {
+				var table = document.getElementById('jsTrolley');
+				var tbody = document.getElementsByTagName('tbody')[0];
+				var frag = document.createDocumentFragment();
+				items.forEach(function(item, i) {
+					var row = document.createElement('tr');
+					row.innerHTML = '<td>' + item.name + '</td><td>' + item.price.toFixed(2) + '</td><td><a href="javascript:void(0);">删除</a></td>';
+					frag.appendChild(row);
+				})
+				tbody.appendChild(frag);
+				checkTotal();
+			}
+
+			function bind() {
+				var tbody = document.querySelector('#jsTrolley tbody');
+				var a = document.querySelectorAll('#jsTrolley tbody td a');
+				var rows = document.getElementsByTagName('tbody')[0].children;
+				var len = a.length;
+				for(let i = 0; i < len; i++) {
+					a[i].addEventListener('click', function(e) {
+						tbody.removeChild(e.target.parentNode.parentNode);
+						checkTotal();
+					});
+				}
+			}
+
+			function checkTotal() {
+				var total = document.querySelector('#jsTrolley tfoot tr td');
+				var rows = document.getElementsByTagName('tbody')[0].children;
+				var len = rows.length;
+				var sum = 0;
+				for(let i = 0; i < len; i++) {
+					sum += parseFloat(rows[i].children[1].innerText);
+				}
+				total.innerText = sum.toFixed(2) + '(' + len + '件商品)';
+			}
+		</script>
+	</body>
+
+</html>

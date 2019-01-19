@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var obj2 = new Object();
+			function changeObj(obj){
+				if(!obj.parent){
+					obj2.obj =new Object();
+					obj2.obj.id = obj.id;
+					obj2.obj.parent = obj.parent;
+				}else{
+					var tempobj = findobj(obj2.obj,obj.parent)
+					tempobj.child = new Object();
+					tempobj.child.id = obj.id;
+					tempobj.child.parent = obj.parent;
+				}
+			}
+			function findobj(obj,i){
+				if(obj.id == i){
+					return obj
+				}else{
+					return findobj(obj.child,i)
+				}
+			}
+			var obj1 = [
+				{id: 1,parent: null},
+				{id: 2,parent: 1},
+				{id: 3,parent: 2}
+			]
+			obj1.forEach(function(n){
+				changeObj(n);
+			});
+			console.log(obj2)
+		</script>
+	</body>
+</html>

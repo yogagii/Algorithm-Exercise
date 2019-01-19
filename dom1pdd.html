@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#pdd {
+				background-color: red;
+			}
+			
+			.pdd-slogen {
+				color: green;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div>pinduoduo</div>
+		<button onclick="myFunction()">点我</button>
+		<script type="text/javascript">
+		//用js生成
+		//<div id = 'pdd'>
+		// <p class = 'pdd-slogen'>多实惠，多乐趣</p>
+		//</div>
+		
+			var div = document.createElement("div")
+			div.setAttribute("id", "pdd");
+			document.body.appendChild(div);
+			//var d = document.getElementById("pdd")
+			var p = document.createElement("p");
+			p.setAttribute("class", "pdd-slogen");
+			p.innerHTML = "多实惠，多乐趣"
+			div.appendChild(p);
+
+			function myFunction() {
+				var btn = document.createElement("BUTTON");
+				document.body.appendChild(btn);
+			}; 
+			
+			
+		</script>
+	</body>
+
+</html>

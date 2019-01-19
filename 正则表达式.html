@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			//邮箱
+			function isAvailableEmail2(sEmail) {
+				var reg = /^(\w+)(\.\w+)*@(\w+)((\.\w+)+)$/;
+				return reg.test(sEmail);
+			}
+			//console.log(isAvailableEmail2("y.ga@163.yoga"))
+
+			//连续重复字母
+			function containsRepeatingLetter(str) {
+			    var reg = /([a-zA-Z])\1/
+			    return reg.test(str);
+			}
+			
+			//元音字母结尾
+			function endsWithVowel(str) {
+			    var reg = /[aeiouAEIOU]$/
+			    return reg.test(str)
+			}
+
+			//出现次数最多的字母
+			var str = 'assssjdssskssamsssdkjsssdss';
+			var arr = str.split(''); //把字符串转换为数组
+			str = arr.sort().join(''); //首先进行排序，这样结果会把相同的字符放在一起，然后再转换为字符串
+			//alert(str);  // aaddjjkkmsssssssssssssssss
+			var value = '';
+			var index = 0;
+			var re = /(\w)\1+/g; //匹配字符，且重复这个字符，重复次数至少一次。
+			var s = str.replace(re, function(a, b) {
+				console.log(a); //代表每次匹配成功的结果 : aa dd jj kk l sssssssssssssssss
+				console.log(b); //代表每次匹配成功的第一个子项，也就是\w:  a d j k l S 
+				if(index < a.length) { //如果index保存的值小于$0的长度就进行下面的操作
+					index = a.length; // 这样index一直保存的就在最大的长度
+					value = b; //value保存的是出现最多的这个字符
+				}
+				return b
+			});
+			var value2 = '';
+			var index2 = 0;
+			str.match(re).forEach(function(n){
+				if(index2<n.length){
+					index2=n.length
+					value2=n[0]
+				}
+			})
+			console.log(s)
+			console.log('最多的字符:' + value + ',重复的次数:' + index); // s   17
+
+			//连续3个数字 
+			function captureThreeNumbers(str) {
+				var reg = /(\d){3}/
+				var s = ''
+				str.replace(reg, function($0) {
+					s = $0
+					return $0 //void
+				})
+				if(s){return s}else{return false}
+			}
+			//console.log(captureThreeNumbers('98'))
+			
+			//'800-555-1212'
+			function matchesPattern(str) {
+			    var reg = /^(\d){3}-(\d){3}-(\d){4}$/
+			    return reg.test(str)
+			}
+			
+			//'$20,933,209.93'
+			function isUSD(str) {
+			    var reg = /^\$[1-9](\d){0,2}(,(\d){3})*(\.(\d){2})?$/
+			    return reg.test(str)
+			}
+			
+			//网址参数
+			var url = 'http://www.baidu.com?a=1&b=2&c=3';
+			var reg = /([^?&=]+)=([^?&=])*/g;
+			var result = url.match(reg);
+			console.log(result)
+			
+			// //转义后是一个/ 
+			console.log('\\\\\\'.replace(new RegExp('\\\\\\\\','gi'),'/'))  //  /\
+			console.log('aaaaa'.replace(new RegExp('aa','gi'),'b'))  //  bba
+			
+			//  /\\/转义一次,等于\ 
+			//  new RegExp('\\\\') 转义两次\\,等于\
+			var pattern = /\\/gi;
+			console.log('\\'.replace(pattern,'/'))
+			console.log('\\'.replace(new RegExp('\\\\','gi'),'/'))
+			console.log('\\\\\\')  //  \\\
+			console.log('\\\\\\'.replace(new RegExp('\\\\\\\\','gi'),'/'))  //  /\
+			//          '\\\'                       '\\'
+			
+			//每个空格替换成“%20”
+			function replaceSpace(str)
+			{
+			    return str.replace(/\ /g,'%20')
+			}
+		</script>
+	</body>
+
+</html>

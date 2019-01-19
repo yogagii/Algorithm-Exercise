@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+
+		<script>
+			var result = []
+			var results = []
+			var results2 = []
+			var results3 = []
+			
+			var s2 = 'abcdef'
+			
+			//全组合
+			quanzuhe(s2)
+			console.log(results)
+			console.log(results.length)
+			
+			//全排列
+			results.forEach(function(m,i){
+				quanpailie(m,i)
+			})
+			
+			result.forEach(function(r){
+				results2 = results2.concat(r)
+			})
+			console.log(results2)
+			console.log(results2.length)
+			
+			function insertLetter(ss, w) {
+				var r = new Array();
+				r.push(w.concat(ss));
+				for(var i = 1; i < ss.length; i++) {
+					r.push(((ss.slice(0, i)).concat(w)).concat(ss.slice(i)))
+				}
+				r.push(ss.concat(w))
+				return r;
+			}
+			
+			function quanpailie(s,k){
+				result[k]=[]
+				result[k][0] = s[0];
+				for(var i = 1; i < s.length; i++) {
+					var temparr = new Array()
+					result[k].forEach(function(n) {
+						temparr = temparr.concat(insertLetter(n, s[i]))
+					})
+					for(var j = 0; j < temparr.length; j++) {
+						result[k][j] = temparr[j]
+					}
+				}
+			}
+			
+			function quanzuhe(s){
+				var arr2= s.split('')
+				var rtemp = []
+				
+				for(var xx = 1;xx<=arr2.length;xx++){
+					loop(arr2,0,xx,xx)
+				}
+			}
+			
+			function loop(arr,start,n,x){
+				if(n){
+					for(var i =start;i<=arr.length-n;i++){
+						if(n==x){
+							rtemp = []
+						}
+						rtemp.push(i)
+						loop(arr,++start,n-1,x)
+						rtemp.pop()
+					} 
+				}else{
+					var stemp = ''
+					rtemp.forEach(function(r){
+						stemp+=arr[r]
+					})
+					results.push(stemp)
+				}
+			}
+			
+			
+			/*function quanzuhe2(s){
+				var arr = s.split('')
+				var r =[]
+				for(var i = 0;i<arr.length-1;i++){
+					for(var j = i+1;j<arr.length;j++){
+						r.push(arr[i]+arr[j])
+					}
+				}
+				return r
+			}*/
+			//console.log(quanzuhe(s2))
+			
+		</script>
+	</body>
+
+</html>

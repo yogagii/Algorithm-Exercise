@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			var a = {}
+			b = {
+				key: 'b'
+			}
+			c = {
+				key: 'c'
+			}
+			a[b] = 123
+			a[c] = 456
+			console.log(a[b])
+
+			//创建promise
+			var promise = new Promise(function(resolve, reject) {
+			    // 进行一些异步或耗时操作
+			    if (false) {                       /*如果成功 */
+			        resolve("Stuff worked!");
+			    } else {
+			        reject(Error("It broke"));
+			    }
+			});
+			//绑定处理程序
+			promise.then(function(result) {
+				//promise成功的话会执行这里
+			    console.log(result); // "Stuff worked!"
+			}, function(err) {
+				//promise失败会执行这里
+			    console.log(err); // Error: "It broke"
+			});
+
+			var promise = new Promise((resolve, reject) => {
+				console.log('a');
+				resolve('Yoga');
+				console.log('b');
+			})
+			promise.then((valuename) => {
+				console.log('c');
+				console.log(valuename)
+			})
+			console.log('d');
+
+			var p = new Promise(function(resolve, reject) {
+				//做一些异步操作
+				setTimeout(function() {
+					console.log('执行完成');
+					resolve('随便什么数据');
+				}, 2000);
+			});
+			p.then((data)=>{
+				console.log(data);
+			})
+		
+			var promise = new Promise((resolve, reject) => {
+				console.log('aa')
+				//resolve(123)
+				console.log('bb')
+				reject(456)
+				console.log('cc')
+				throw new Error('test');   // 这里抛了一个异常
+				console.log('dd')
+			}).then(function(aaa) {
+				console.log(aaa);
+			}).catch(function(bbb) {
+				console.log(bbb);
+			});
+		</script>
+	</body>
+
+</html>

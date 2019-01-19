@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+	</body>
+	<script src="graph.js"></script>
+	<script type="text/javascript">
+		var graph = new Graph(10);
+		graph.addEdge(0, 1);
+		graph.addEdge(0, 2);
+		graph.addEdge(0, 5);
+		graph.addEdge(0, 6);
+		graph.addEdge(1, 3);
+		graph.addEdge(1, 8);
+		graph.addEdge(1, 9);
+		graph.addEdge(2, 4);
+		graph.addEdge(5, 7);
+		//graph.showGraph();
+		
+		var m =3;
+		var n =4;
+		var mn = [[0,0,1,0],[0,0,1,1],[1,0,0,0]]
+		g=new Array()
+		for(var i =0;i<m;i++){
+			for(var j =0;j<n;j++){
+				g[i*n+j]=new Array();
+				(i-1<0||i-1>=m||j-1<0||j-1>=n)||g[i*n+j].push((i-1)*n+j-1);
+				(i<0||i>=m||j-1<0||j-1>=n)||g[i*n+j].push((i)*n+j-1);
+				(i+1<0||i+1>=m||j-1<0||j-1>=n)||g[i*n+j].push((i+1)*n+j-1);
+				(i-1<0||i-1>=m||j<0||j>=n)||g[i*n+j].push((i-1)*n+j);
+				(i+1<0||i+1>=m||j<0||j>=n)||g[i*n+j].push((i+1)*n+j);
+				(i-1<0||i-1>=m||j+1<0||j+1>=n)||g[i*n+j].push((i-1)*n+j+1);
+				(i<0||i>=m||j+1<0||j+1>=n)||g[i*n+j].push((i)*n+j+1);
+				(i+1<0||i+1>=m||j+1<0||j+1>=n)||g[i*n+j].push((i+1)*n+j+1);
+				//console.log(g[i*n+j]) 
+			}
+		}
+		
+		function dfs_m(vertice) {
+			visited[vertice] = true;
+			//console.log(vertice);
+			for(var j = 0; j < g[vertice].length; j++) {
+				var curVertice = g[vertice][j];
+				var mmm = Math.floor(curVertice/n);
+				var nnn = curVertice-Math.floor(curVertice/n)*n
+				if(!visited[curVertice]&&mn[mmm][nnn]==1) {
+					qiudui[count]++;
+					dfs_m(curVertice); 
+				}
+			}
+		}
+		
+		function bfs(v){
+			var queue = [];
+			queue.push(v);
+			visited[v] = true;
+			while(queue.length>0){
+				var cv = queue.shift();
+				g[cv].forEach(function(item){
+					var mmm = Math.floor(item/n);
+					var nnn = item-Math.floor(item/n)*n
+					if(!visited[item]&&mn[mmm][nnn]==1){
+						visited[item] = true
+						qiudui[count]++;
+						queue.push(item);
+					}
+				})
+			}
+		}
+		
+		var visited = new Array()
+		for(var i = 0;i<m*n;i++){
+			visited[i] = false;
+		}
+		var qiudui = new Array()
+		var count = 0
+		for(var i = 0;i<m*n;i++){
+			var mm = Math.floor(i/n);
+			var nn = i-Math.floor(i/n)*n;
+			if(!visited[i]&&mn[mm][nn]==1){
+				qiudui[count]=1;
+				//dfs_m(i);
+				bfs(i);
+				count++;
+			}
+		}
+		console.log(qiudui)
+		
+	</script>
+
+</html>

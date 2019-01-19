@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			var n = 4
+			var m = 10
+			var bag =[1,5,2,1,6,1,2,5,7,2]
+			var map = []
+			var map2 = []
+			for(var i = 1; i <= 100; i++) {
+				map[i] = 0
+			}
+			var max = 0
+			var a = 0
+			for(var i = 0; i < m; i++) {
+				map[bag[i]]++
+					if(max < map[bag[i]]) {
+						max = map[bag[i]]
+					}
+			}
+			for(var i = 1; i <= 100; i++) {
+				map2[i] = map[i]
+			}
+			for(var i = max; i >= 1; i--) {
+				var cnt = 0
+				for(var m = 1; m <= 100; m++) {
+					map2[m] = map[m]
+				}
+				console.log('i:'+i)
+				for(var j = 1; j <= 10; j++) {
+					console.log(map2[j])
+					if(map2[j] != 0&&map2[j] - i >= 0) {
+						console.log('c')
+						cnt++;
+						map2[j]=map2[j]-i
+						if(map2[j]>= i) {
+							j--;
+						}
+					}
+				}
+				console.log('c:'+cnt)
+				if(cnt >= n) {
+					a = i
+					break
+				}
+			}
+			console.log(a)
+		</script>
+	</body>
+
+</html>
